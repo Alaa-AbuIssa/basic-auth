@@ -1,22 +1,31 @@
 'use strict';
 
+// 3rd Party Resources
 const express = require('express');
+const router = require('./auth/router')
 const cors = require('cors');
-const router=require('./auth/router')
+
+
+// Prepare the express app
 const app = express();
 
-app.use(cors());
+// Process JSON input and put the data on req.body
 app.use(express.json());
 
+// Process FORM intput and put the data on req.body
 app.use(express.urlencoded({ extended: true }));
 
-app.post('/signup' , router)
-app.post('/signin' , router)
+app.use(cors());
 
-module.exports = {
-  app,
-  start: (port) => {
-    app.listen(port, () => console.log(`Listening on ${port}`));
-  },
+app.post('/signin',router);
+app.post('/signup',router);
+
+function start(port){
+  app.listen(port, ()=>{
+    console.log(`Listening on port ${port}`);
+  })
+}
+
+module.exports={
+  app,start
 };
-

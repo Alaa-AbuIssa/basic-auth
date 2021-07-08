@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 const base64 = require('base-64');
 const usersModel = require('../models/users-model');
 
-module.exports = async (req, res, next) => {
+module.exports = async(req,res,next) => {
 
   /*
     req.headers.authorization is : "Basic sdkjdsljd="
@@ -29,15 +29,15 @@ module.exports = async (req, res, next) => {
        - bcrypt does this by re-encrypting the plaintext password and comparing THAT
     3. Either we're valid or we throw an error
   */
-  try {
-    const user = await usersModel.findOne({ username: username })
-    const valid = await bcrypt.compare(password, user.password);
-    if (valid) {
-      req.body.user = user;
-      next();
-    }
-    else {
-      throw new Error('Invalid User')
-    }
-  } catch (error) { res.status(403).send("Invalid Login"); }
+    try {
+      const user = await usersModel.findOne({ username: username })
+      const valid = await bcrypt.compare(password, user.password);
+      if (valid) {
+        req.body.user=user;
+        next();
+      }
+      else {
+        throw new Error('Invalid User')
+      }
+    } catch (error) { res.status(403).send("Invalid Login"); }
 }
