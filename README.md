@@ -9,7 +9,7 @@ we will be building an Auth Api server using best practices, including server mo
 
 ## UML 
 
-<img src="src/Flowchart.png" />
+<img src="./src/Flowchart.png" />
 
 ## LINKS :
 
